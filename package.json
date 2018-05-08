@@ -1,0 +1,22 @@
+{
+  "name": "jfslms",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shivam",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-processhtml": "^0.4.1",
+    "grunt-war": "^0.5.1"
+  },
+  "dependencies": {
+    "angular-material-time-picker": "^1.0.8"
+  },
+  "description": ""
+}

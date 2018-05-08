@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<style></style>
+
+<div class="dmTimepickerBox"
+     ng-style="stylefn()">
+    <input type="text"
+           placeholder="hh:mm"
+           ng-focus="onTimepickerFocus()"
+           ng-blur="onTimepickerBlur()"
+           ng-model="timePickerModel"
+           dm-focus="isPickingTime==false"
+           style="border:none !important;"
+           ng-readonly="isPickerOpen"/>
+    <div class='pickerBox' ng-show="isPickerOpen == true" ng-class="{'inverse':isPickerInverse}">
+        <div class="pickerTimeValue">
+            {{hourPickerModel| toNDigits:2}}:{{minutesPickerModel| toNDigits:2}}
+        </div>
+        <div>
+            <label>
+                00
+            </label>
+            <input type="range" min="0" max="23" ng-model="hourPickerModel" ng-change="setTime()"/>
+            <label>
+                23 (hr)
+            </label>
+        </div>
+        <div>
+            <label>
+                00
+            </label>
+            <input type="range" min="0" max="59" ng-model="minutesPickerModel" ng-change="setTime()"/>
+            <label>
+                59 (min)
+            </label>
+        </div>
+        <!--        <div class='pickerWrapper'>
+                    <div class='radialBox' ng-show="isPickingHour">
+                        <ul>
+                            <li ng-repeat="hour in timeHrData">
+                                <label ng-style="{transform: 'rotate('+$index*15+'deg) translate(60px) rotate('+(90-$index*15)+'deg)'}"
+                                       ng-mousedown="setHours(hour.value)">{{hour.value}}</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class='radialBox' ng-show="isPickingMinutes">
+                        <ul>
+                            <li ng-repeat="minutes in timeMinData">
+                                <label ng-style="minTransformStyle($index)"
+                                       ng-mousedown="setMinutes(minutes.value)">{{minutes.value}}</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>-->
+    </div>
+    <!--    <dmradialBox
+            numberList="0-23"
+            iterartor=""
+            themecolor="",
+            actionClick=""
+            >
+        </dmradialbox>
+        <dmradialBox
+            numberList="0-59"
+            iterartor="5"
+            themecolor="",
+            actionClick=""
+            >
+        </dmradialbox>-->
+</span>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="MDM" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="MDM" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="MDM" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+     <html lang="en" ng-app="MDM" class="no-js">
+        <head>
+            
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="images/MDM_feviLogo.ico"/>
+        <link rel="stylesheet" href="animate.css">
+        <!-- <link rel="shortcut icon" href="images/imgg.ico.png"/>-->
+        
+      
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Master Data Management</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1"><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+       
+        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+        <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+        <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="login/login.css">
+        <link rel="stylesheet" href="templates/appHeader/headertemplate.css">
+        <link rel="stylesheet" href="mainpage2/mainpage2.css">
+        <link href="batch/batch.css" rel="stylesheet" type="text/css"/>
+        <link href="css/pikaday.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="commonFilters/dmTimePicker.css" type="text/css"/>
+        <link href="commonFilters/dmCommonStyle.css" rel="stylesheet" type="text/css" />
+        <link href="uploadedBatch/uploadedBatch.css" rel="stylesheet" type="text/css"/>      
+        
+        <!--  <link rel="stylesheet" type="text/css" href="fonts/ubuntu.woff2">-->
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro|Dosis|Abel|PT+Sans|Poiret+One|Ubuntu|Josefin+Sans|Titillium+Web|Open+Sans|Julius+Sans+One|Text+Me+One' rel='stylesheet' type='text/css'>
+        <!--   <link rel="stylesheet" type="text/css" href="css/font-awesome.css">-->
+
+   </head>
+    <body ng-style="RouteData.get('bodyStyle')" ng-controller='mdm_init'>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!--        <div ng-show="showMDMLoader" class="overlay" 
+                     ng-init="showMDMLoader=false">
+            <div class="loader">
+            <i class="fa fa-circle-o-notch   fa-spin"></i>
+            <label>
+            <label class="loadingMessage">{{loadingMessage}}</label>
+            </label>
+            </div>
+            </div>-->
+    <dm-dialogue> </dm-dialogue>
+    <div ng-view>
+
+    </div>
+    <!--        <div class="overlay">
+                
+            </div>-->
+
+    <footer>
+        <label>Decimal MDM: v
+            <span app-version></span>
+        </label>
+    </footer>
+  
+   
+    
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="route-data.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/pikaday.js"></script>
+     <script src="js/pikaday-angular.js"></script>
+    <script src="platware/PlatwareAES.js"></script>
+    <script src="js/jszip.js"></script>
+    <script src="js/aes.js"></script>
+    <script src="js/pbkdf2.js"></script>
+    <script src="js/fingerprint.js"></script>
+    <script src="js/sha2.js" type="text/javascript"></script>
+    <script src="platware/PlatwareClient.js"></script>
+    <script src="angular-messages.js"></script>
+    <script src="commonFilters/commonFilters.js"></script>
+    <script src="app.js"></script>
+    <script src="login/login.js"></script>
+    <script src="mainpage2/mainpage2.js"></script>
+    <script src="batch/batch.js"></script>
+    <script src="uploadedBatch/uploadedBatch.js"></script>
+    
+    <script src="js/xlsx.js"></script>
+    <script src="components/version/version.js"></script>
+    <script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
+    <!--    <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="route-data.js"></script>
+        <script src="platware/PlatwareAES.js"></script>
+        <script src="js/aes.js"></script>
+        <script src="js/pbkdf2.js"></script>
+        <script src="js/fingerprint.js"></script>
+        <script src="platware/PlatwareClient.min.js"></script>
+        <script src="angular-messages.js"></script>
+        <script src="commonFilters/commonFilters.js"></script>
+        <script src="app.min.js"></script>
+        <script src="login/login.min.js"></script>
+        <script src="mainpage2/mainpage2.min.js"></script>
+        <script src="js/xlsx.min.js"></script>
+        <script src="components/version/version.js"></script>
+        <script src="components/version/version-directive.js"></script>
+        <script src="components/version/interpolate-filter.js"></script>-->
+</body>
+</html>

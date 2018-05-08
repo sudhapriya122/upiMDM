@@ -1,0 +1,69 @@
+.mainheader{
+    position:fixed;
+    background-color: #ec6726;
+    width:100%;
+    color: #ffffff;
+    z-index:101;
+}
+.mainHeaderLogo{
+    display: inline-block;
+    font-size: 0.4em;
+    margin: 0 0 0 5px;
+}
+.mainHeaderLogo i.fa.fa-stack-2x{
+    margin: -8px 0 0 0;
+
+}
+.mainHeaderLogo img{
+    height:54px;
+
+}
+.mainHeaderLogo i.fa.fa-stack-1x{
+    margin: 10px 0 0 0;
+    position: absolute;
+    color:#ffffff;
+    background-color: #ec6726;
+    border-radius: 50%;
+}
+.fa-stack{
+    margin-left:15px;
+}
+.appname{
+    display:inline-block;
+}
+.appname h1{
+    font-size: 1.2em;
+    margin: 5px;
+    padding: 0;
+    display:inline-block;
+}
+.mainHeaderUserSection{
+    display: inline-block;
+    right: 25px;
+    position: absolute;
+}
+.mainHeaderUserSection ul{
+    list-style: none;
+    margin:0;
+    padding:0;
+    margin-top:5px;
+}
+.mainHeaderUserSection ul li{
+    display:inline-block;
+}
+.mainHeaderUserSection ul i{
+    margin-left: 16px;
+    font-size: 30px;
+    vertical-align: text-bottom;
+    cursor: pointer;
+}
+.mainHeaderUserSection ul li label{
+    font-size:1.2em;
+    text-transform: capitalize;
+    /*// text-transform: uppercase;*/
+
+}
+.powericon{
+    font-size:1.7em !important;
+    margin-left:30px;
+}

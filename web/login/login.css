@@ -1,0 +1,163 @@
+
+/* body {
+    font-family: 'Source Sans Pro', sans-serif;
+  
+
+} */
+/********************* Placeholder ******************************/
+body ::-webkit-input-placeholder {
+    font-family: 'Source Sans Pro', sans-serif;   
+}
+body :-moz-placeholder {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+body :-ms-input-placeholder {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+input:focus::-webkit-input-placeholder { 
+    color:transparent; 
+}
+input:focus::-moz-input-placeholder { 
+    color:transparent; 
+}
+input:focus::-ms-input-placeholder { 
+    color:transparent; 
+}
+.loginContainer ::-webkit-input-placeholder {
+    font-family: 'Source Sans Pro', sans-serif;   
+    color:#ffffff;
+}
+.loginContainer :-moz-placeholder {
+    font-family: 'Source Sans Pro', sans-serif;
+    color:#ffffff;
+}
+.loginContainer :-ms-input-placeholder {
+    font-family: 'Source Sans Pro', sans-serif;
+    color:#ffffff;
+}
+/********************** Login container******************************/
+.loginContainer {
+    color: #ffffff;
+    font-weight: 500;
+    margin:7% 0% 0% 0%;
+    text-align: center;
+    overflow-y:hidden;
+    background-color: #FFED00;
+    margin-top: 80px;
+    border-radius: 35px;
+    margin-right:500px;
+    margin-left:500px;
+   
+   
+}
+
+div.loginContainer.ng-scope
+{
+    background-color: #ec6726;
+}
+
+div.headerLogo
+{
+    background-color: #FFED00;
+}
+
+.loginContainer h1 {
+    font-size: 2em;
+    font-weight: 200;
+}
+/******************* Login Form Input***********************/
+form input {
+    background-color: transparent;
+    border-radius: 10px; 
+    font-size:18px;
+    width: 280px;
+    border: 0;
+    padding: 3px;
+    margin: 0 auto 10px auto;
+    display: block;
+    text-align: center;
+    color: red;
+    font-weight: 300;
+    height:2em;
+    border-bottom: 1px solid red;
+}
+form input:hover {
+    color: #ffffff;
+    background-color: #ec6726;
+    border-bottom: 1px solid #ffffff;
+    transition-property: border-color;
+    transition-duration: 1s;
+    -webkit-transition-property: border-color;
+    -webkit-transition-duration: 1s;
+    -o-transition-property: border-color;
+    -o-transition-duration: 1s;
+    -moz-transition-property: border-color;
+    -moz-transition-duration: 1s;
+}
+form input:focus {
+    border-color: red;
+    outline:none;
+    transition-property: border-color;
+    transition-duration: 0.5s;
+    -webkit-transition-property: border-color;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-property: border-color;
+    -o-transition-duration: 0.5s;
+    -moz-transition-property: border-color;
+    -moz-transition-duration: 0.5s;
+}
+/*************************** Login Form Button********************************/
+form button {
+    background-color: #ec6726;
+    border: 0;
+    padding: 8px 15px;
+    color: #ffffff;
+    border-radius: 3px;
+    width: 285px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top:7px;
+}
+form button:hover {
+    background-color: red;
+}
+/*********************Login Logo****************************/
+.headerLogo{
+    display: inline-block;
+    height: inherit;
+    /* border: 2px solid #ffffff; */
+    /* border-radius: 100%; */
+    padding: 30px;
+}
+.headerLogo span {
+    margin: 0;
+    padding: 0;
+}
+.headerLogo i.fa.fa-stack-2x{
+    margin: -10px 0;
+}
+.headerLogo i.fa.fa-stack-1x{
+    margin-top: 30px;
+}
+/********************** Media Queries*****************************/
+@media screen and (max-width:600px){
+    .loginContainer {
+        margin: 20% 0 0 0;
+    }
+    .loginContainer h1 {
+        font-size: 2em;
+        /*//margin: 9% 0 0 0;*/
+    }
+}
+@media screen and (max-width:400px){
+    .loginContainer {
+        margin:25% 0 0 0;
+
+    }
+    .loginContainer h1 {
+        font-size: 2em;
+        /*// margin: 13% 0 0 0;*/
+    }
+}
+
+

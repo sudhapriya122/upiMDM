@@ -1,0 +1,91 @@
+
+<style>
+    searchlist{
+        font-family: helvetica;
+    }
+    searchlist label.dmSearchlistTitle, searchlist span.dmSearchlistBox{
+        display: block;
+    }
+    searchlist label{
+        font-size: 1.2em;
+    }
+    searchlist span.dmSearchlistBox{
+        position: relative;
+    }
+    searchlist  span input{
+        padding:6px;
+    }
+    searchlist span autocomplete{
+        position: absolute;
+        display: block;
+        left:0px;
+        max-height: 180px;
+        background: #ffffff;
+        margin: 0px;
+        padding: 0px;
+        z-index: 3;
+        overflow-x: hidden;
+        overflow-y: auto;
+        box-shadow: 0 2px 5px #d2d2d2;
+        outline:1px solid #d2d2d2;
+    }
+    searchlist span autocomplete.inverse{
+        bottom:43px;
+    }
+    searchlist span autocomplete ul{
+        width:100%;
+        margin:0;
+        padding: 0;
+        display: block;
+    }
+    searchlist span autocomplete ul li{
+        margin:0;
+        padding:5px 3px;
+        display:block;
+        border-bottom:1px solid #d2d2d2;
+        color:#000000;
+    }
+    searchlist span autocomplete ul li:last-child{
+        border: none;
+    }
+    searchlist span autocomplete ul li:hover{
+        cursor: pointer;
+    }
+    searchlist span autocomplete ul li label{
+        text-transform: capitalize;
+    }
+    searchlist span autocomplete ul li label:hover{
+        cursor: pointer;
+    }
+</style>
+
+<label class="dmSearchlistTitle" ng-show="title">
+    {{title}} : 
+    
+</label>
+<span class="dmSearchlistBox">
+    <input type="text"
+           placeholder="{{placeholder}}"
+           ng-focus="isListOpen = false"
+           ng-blur="isListOpen = true"
+           ng-model="searchListInputModel"
+           ng-change="callOnChange()"
+           ng-style="stylefn()"/>
+    <autocomplete ng-show="!isListOpen" ng-style="{width:textBoxWidth}" ng-class="{'inverse':isListInverse}">
+        <ul style="border-color: blue">
+            <li style="border-color: red;" ng-repeat="item in itemlist | filter:searchListInputModel track by $index"
+                ng-mousedown="itemClick(item)"
+                ng-mouseenter="setHover($index)"
+                ng-mouseleave="unsetHover($index)"
+                ng-style="getHoverStyle($index)">
+                <label>{{item[itemDescription]}}</label>
+            </li>
+
+        </ul>
+
+    </autocomplete>
+</span>
+
+<button ng-show="isButton" ng-click="buttonClick()">{{buttonTitle}}</button>
+
+

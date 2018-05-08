@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<appheader appname="Master Data Management" dmUsername="userName"></appheader>
+<loader ng-show="showMDMLoader" ng-include src="'templates/loader/loader.html'"></loader>
+<section class="mainpagecontainer" ng-controller="batchDataCtrl" ng-style="RouteData.get('sectionStyle')" ng-init="checkSession()" >
+    //    <!-- -----------------BreadCrumbs------------------------------>
+
+    <div class="path">
+        <ul class ="breadcrumb flat ">
+            <li  ng-repeat='name in getPath track by $index' ng-click="pathAction(name.action, $index,$event)" >
+                <div>{{name.name}}</div>
+
+                <!--                <div class='pathData'>{{name.name}}</div>
+                                <div class='pathData'><i ng-click="pathAction(name.action,$index)" class='fa fa-pencil'></i></div>-->
+            </li>
+        </ul>
+    </div>
+    <div class="stagingTable" ng-show="showScreenControls.showBatchTable">
+
+        <div>
+            <h2> Batch Records </h2>
+        </div>
+        <!------------------------ Current Batch Rows Table --------------------- ------------>
+        <div>
+            <dm-table dm-datasource="batchRowData"  
+                      dm-searchable="true" 
+                      dm-theme="ec6726"
+                      dm-tab-seperator-key="batch_status"
+                      dm-table-data-actions
+                      dm-procedure="getBatchData"
+                      dm-server-paging="collectiveServerCalls">  
+
+            </dm-table>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,23 @@
+<loader ng-show="showMDMLoader" ng-include src="'templates/loader/loader.html'"></loader>
+<div class="loginContainer" ng-controller="loginCtrl">
+        <!------------------- Login Page Logo ----------------------------->
+        <div class="headerLogo">
+<!--            <span class="fa-stack fa-lg">
+                <i class="fa fa-database fa-stack-2x"></i>
+                <i class="fa fa-cloud-upload fa-stack-1x"></i>
+            </span>-->
+<span>
+    <img src="images/logo.jpg" alt=""/>
+</span>
+       <br/><br/>
+       <div>
+   
+            <!----------------- Login Interface------------------------>
+    <form name="userForm" class="form">
+        <input placeholder="Username" maxlength="35" id="username" class="input" ng-model="mdmUsername">
+        <input type="password" placeholder="Password" ng-model="mdmPassword">
+        <button type="submit" id="login-button"  ng-click="validateLogin()">Login</button>
+    </form>
+    </div>
+</div>
+</div>

@@ -1,0 +1,551 @@
+<appheader appname="Master Data Management" dmUsername="userName"></appheader>
+<loader ng-show="showMDMLoader" ng-include src="'templates/loader/loader.html'"></loader>
+<section class="mainpagecontainer" ng-controller="mainpageCtrl" ng-style="RouteData.get('sectionStyle')"
+ ng-init="checkSession()">
+
+    <!-- -----------------BreadCrumbs------------------------------>
+
+    <div class="path">
+        <ul class ="breadcrumb flat ">
+            <li  ng-repeat='name in getPath track by $index' ng-click="pathAction(name.action, $index,$event)" >
+                <div>{{name.name}}</div>
+                <!--                <div class='pathData'>{{name.name}}</div>
+                            <div class='pathData'><i ng-click="pathAction(name.action,$index)" class='fa fa-pencil'></i></div>-->
+            </li>
+        </ul>
+    </div>
+    <!---  ---------------------List Of ORGs--------------------------- -->
+    <div class="orgOptions" ng-show="showScreenControls.showOrgOptions">
+        <ul>
+            <h2>Select the Org </h2>   
+            <li><searchlist  itemlist="{{OrgList}}" 
+                             itemvalue="orgid" 
+                             itemdesc="orgid" 
+                             label="Org Id" 
+                             placeholder="Select Org ID" 
+                             itemaction=""
+                             ng-model="orgItem"
+                             themecolor="ec6726">
+            </searchlist></li>
+        </ul>
+    </div>
+     
+ 
+
+
+<!--            <li>
+                <div class="proceedImageSection"><i class="fa fa-file-text proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData('Create Mapping')">Create Data Mapping</button></div>
+            </li>-->
+<!--            <li>
+                <div class="proceedImageSection"><i class="fa fa-exchange proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData('Change Mapping')">Change Data Mapping</button></div>
+            </li>-->
+
+
+    <!----------------------------- Proceed Options------------------------------- -->
+    <div class="proceedAction" ng-class="showScreenControls.optsClass" ng-show ="showScreenControls.showProceedAction" >
+        <ul ng-show="showScreenControls.showProceedButtons">
+            <h2>How would you like to proceed </h2>    
+      
+
+           <li class="animated zoomIn"> 
+                <div class="proceedImageSection"><i class="fa fa-upload proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData('Upload Data')">Upload Data</button></div>
+            </li> 
+            <li class="animated zoomIn">
+                <div class="proceedImageSection"><i class="fa fa-list proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData('Staging Data')">Staging Data</button></div>
+            </li>
+            <li class="animated zoomIn">
+                <div class="proceedImageSection"><i class="fa fa-list proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData('Master Data')">Master Data</button></div>
+            </li>
+            <li class="animated zoomIn">
+                <div class="proceedImageSection"><i class="fa fa-search proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData('Search Engine')">Search Engine</button></div>
+            </li>
+            <!-- <li>
+                <div class="proceedImageSection"><i class="fa fa-list proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData1('Master Data')">Master Data1</button></div>
+            </li>
+            <li>
+                <div class="proceedImageSection"><i class="fa fa-list proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData2('Master Data')">Master Data2</button></div>
+            </li> -->
+<!--            <li>
+                <div class="proceedImageSection"><i class="fa fa-close proceedIcons"></i></div>
+                <div class ="proceedButtonSection"><button class="proceedButtons" ng-click="uploadData('Rejected Data')">Rejected Data</button></div>
+            </li>-->
+        </ul>
+        <!--------------------------- List Of Entity --------------------------------- -->
+        <ul  ng-show="showScreenControls.proceedEntity">
+            <h2 ng-show="headingShown == 'upload'">Upload your file here.... </h2>
+            <h2 ng-show="headingShown == 'create'">Select Entity And Create Mapping</h2>
+            <h2 ng-show="headingShown == 'change'">Select Entity And Change Mapping</h2>
+            <li>
+            <searchlist label="Entity"
+                        placeholder="Select Entity" 
+                        itemlist="{{entityList| byProp:'orgid':currentOrg.id}}" 
+                        itemvalue="entityid" 
+                        itemdesc="entitydescription"
+                        itemaction=""
+                        ng-model="entityItem"
+                        themecolor="ec6726">
+            </searchlist>
+           
+            </li>
+            <!-- ------------------------- List Of template --------------------------------- -->
+            <li ng-show="showScreenControls.showTemplateOption">
+            <searchlist label="Template"
+                        placeholder="Select Template" 
+                        itemlist="{{templateList}}" 
+                        itemvalue="templateid" 
+                        itemdesc="filename"
+                        itemaction=""
+                        actiontitle="Download"
+                        buttonaction="downloadFile"
+                        themecolor="ec6726"
+                        ng-model="templateItem">
+                
+            </searchlist>
+            
+            </li>
+        </ul>
+
+        <!-------------------------File Upload Section---------------------------------------->
+        <div class="fileUploadResult" ng-show="showScreenControls.showFileUploadResult">
+            <div class="list">
+                <ul>
+                    <label class="labelHeader">entity header</label>
+                    <li ng-repeat="obj in templateData">
+                        <div>
+                            {{obj.attributename}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="list">
+                <ul  ng-click="showList()">
+                    <label class="labelHeader">file header</label>
+                    <li id="fileHeader" ng-repeat="obj1 in showScreenControls.headers track by $index"
+                        ondragstart="angular.element(this).scope().onDragStart(this)">
+                        <div>
+                            {{obj1}}
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="fileupload" ng-show="showScreenControls.showfileUpload">
+            <div class="upload">
+                <div><i class="fa fa-upload"></i>Upload</div>
+                <input type="file" id="UploadFileInput" name="upload"/>
+
+            </div>
+            <span class="fileName" id='fileName'>{{fileName}}</span>
+                      <!-- <input type="file" id="UploadFileInput" accept=".xls,.xlsx,.csv"  ng-show="showFileUploadButton" class="inputFile">
+                        <div id="uploadCustomButton" class="customButton"><div><i class="fa fa-cloud-upload"></i>Upload File</div></div>
+                        <span id="uploadFileName"></span> -->
+            <div class="fileoption" ng-if="showScreenControls.sheetsObj.sheets.length > 1" >
+                <select ng-model="showScreenControls.sheetsObj.selectedSheet" 
+                        ng-options="filenames for filenames in showScreenControls.sheetsObj.sheets track by filenames" 
+                        ng-change="getSelectedSheetData()">  
+                    <option selected="selected" value="">--Select Option--</option>
+                </select>
+            </div>
+        </div>
+
+        <!------------------------------ Create Mapping Section ------------------------------------>
+
+        <div class="createMappingresults" ng-show="showScreenControls.showcreateMapping">
+            <div class="fileupload">
+                <div class="upload">
+                    <div><i class="fa fa-upload"></i>Upload</div>
+                    <input type="file" id="createFileInput" name="upload"/>
+
+                </div>
+                <span class="fileName" id='createFileName'>{{fileName}}</span>
+                <!--                <input type="file" id="createMappingFileInput" accept=".xls,.xlsx,.csv"  ng-show="showFileUploadButton" class="inputFile">
+                                <div id="createCustomButton" class="customButton"><div><i class="fa fa-cloud-upload"></i>Select File</div></div>
+                                <span id="createFileName"></span>-->
+                <div class="fileoption" ng-if="showScreenControls.sheetsObj.sheets.length > 1">
+                    <select ng-model="showScreenControls.sheetsObj.selectedSheet" 
+                            ng-options="filenames for filenames in showScreenControls.sheetsObj.sheets track by filenames" 
+                            ng-change="getSelectedSheetData()">  
+                        <option selected="selected" value="">--Select Option--</option>
+                    </select>
+                </div>
+                 
+<!--                <div class="createMappingFile">
+                   
+                    <dm-table dm-datasource="generatedFileAttrName"  
+                  dm-searchable="true" 
+                  dm-theme="ec6726" 
+                  ng-show="generatedFileTable"
+                  >
+        </dm-table>
+                </div>-->
+            </div>
+            <div class="generateTemp"> <a ng-click="generateFile($event)">Generate Template</a></div>
+            <div class="mapping" ng-show="showScreenControls.createMappingSection">
+                <div class="resultSection1">
+                    <div class="list">
+                        <ul>
+                            <label class="labelHeader">entity header</label>
+                            <li ng-repeat="obj in attributeList">
+                                <div>
+                                    {{obj.attributename}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <label class="labelHeader">Mapped headers</label>
+                            <li ng-repeat="obj in droppedData" 
+                                ondragenter="angular.element(this).scope().onDragEnter(this,event)" 
+                                ondragover="angular.element(this).scope().onDragOver(this,event)" 
+                                ondrop="angular.element(this).scope().onDrop(this, event)"
+                                ng-click="selectMappedHeader($index)"
+                                ng-class="{'dragover':isDrag == $index,'mapheader':selectedMappedHeaderIndex == $index}">
+                                <div class="mappedheaders" >
+                                    {{obj['data']}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="resultSection2" ng-show="showCreateResultSection2">
+                    <div class="mappingIcons">
+                        <ul>
+                            <label class="labelHeader">Mapping Actions</label>
+                            <li ng-repeat="icons in icon" >
+                                <div class='popover'>
+
+                                </div>
+                                <button class="mappingButtons"><i ng-click="mappingIcon(icons.iconname);" class="fa {{icons.iconname}}"></i></button>    
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="resultSection3" ng-show="showCreateResultSection3">
+                    <ul  ng-click="showList()">
+                        <label class="labelHeader">file header</label>
+                        <li id="fileHeader" ng-repeat="obj1 in showScreenControls.headers track by $index" draggable="true" ng-click="selectFileHeader($index)" ng-class="selectedFileHeaderIndex==$index?'fileheader':''"
+                            ondragstart="angular.element(this).scope().onDragStart(this)">
+                            <div>
+                                {{obj1}}
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="submit" ng-show="showScreenControls.showSubmitButton">
+                <input type="text" placeholder="Enter Template Name" ng-model="templateName" >
+                <button class='commonButton' ng-click="submitTemplateUploadData()">submit</button>
+            </div>
+            <div ng-show="showNotification" class="information">
+                <ul>
+                    <li>Provision for drag and drop the headers</li> |
+                    <li>">" : Move all mapped headers to file header</li> |
+                    <li>"<" : Move all file headers to mapped header</li>|
+                    <li>"->" : Move selected mapped headers to file header</li>|
+                    <li>"<-" : Move selected file header to mapped header</li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!----------------------------- Change Mapping Section ------------------------------------>
+        <div class="changeMappingResults" ng-show="showScreenControls.showchangeMapping">
+
+            <div class="mapping">
+                <div class="resultSection1">
+                    <div class="list">
+                        <ul>
+                            <label class="labelHeader">entity header</label>
+                            <li ng-repeat="obj in attributeList">
+                                <div>
+                                    {{obj.attributename}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <label class="labelHeader">Mapped headers</label>
+                            <li ng-repeat="obj in droppedData track by $index" 
+                                ondragenter="angular.element(this).scope().onDragEnter(this,event)" 
+                                ondragover="angular.element(this).scope().onDragOver(this,event)" 
+                                ondrop="angular.element(this).scope().onDrop(this, event)"
+                                ng-click="selectMappedHeader($index)"
+                                ng-class="{'dragover':isDrag == $index,'mapheader':selectedMappedHeaderIndex == $index}">
+                                <div class="mappedheaders" 
+                                     >
+                                    {{obj['data']}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="resultSection2">
+                    <div class="resultSection2">
+                        <div class="mappingIcons">
+                            <ul>
+                                <label class="labelHeader">Mapping Actions</label>
+                                <li ng-repeat="icons in icon" >
+                                    <button class="mappingButtons"><i ng-click="mappingIcon(icons.iconname);" class="fa {{icons.iconname}}"></i></button>    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="resultSection3">
+                    <ul  ng-click="showList()">
+                        <label class="labelHeader">file header</label>
+                        <li id="fileHeader" ng-repeat="obj1 in showScreenControls.headers track by $index" draggable="true" ng-click="selectFileHeader($index)" ng-class="selectedFileHeaderIndex==$index?'fileheader':''"
+                            ondragstart="angular.element(this).scope().onDragStart(this)"
+                            >
+                            <div>
+                                {{obj1}}
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="fileupload">
+                <div class="upload">
+                    <div><i class="fa fa-upload"></i>Upload</div>
+                    <input type="file" id="changeFileInput" name="upload"/>
+
+                </div>
+                <span class="fileName" id='changeFileName'>{{fileName}}</span>
+                <!--                <input type="file" id="changeMappingFileInput" accept=".xls,.xlsx,.csv"  ng-show="showFileUploadButton" class="inputFile">
+                                <div id="changeCustomButton" class="customButton"><div><i class="fa fa-cloud-upload"></i>Select File</div></div>
+                                <span id="changeFileName"></span>-->
+                <div class="fileoption" ng-if="showScreenControls.sheetsObj.sheets.length > 1">
+                    <select ng-model="showScreenControls.sheetsObj.selectedSheet" 
+                            ng-options="filenames for filenames in showScreenControls.sheetsObj.sheets track by filenames" 
+                            ng-change="getSelectedSheetData()">  
+                        <option selected="selected" value="">--Select Option--</option>
+                    </select>
+                </div>
+                <div class="submit" ng-show="showScreenControls.showSubmitButton">
+                    <button class='commonButton' ng-click="submitChangedTemplateData()">submit</button>
+                </div>
+            </div>
+            <div ng-show="showNotification" class="information">
+                <ul>
+                    <li>Provision for drag and drop the headers</li> |
+                    <li>">" : Move all mapped headers to file header</li> |
+                    <li>"<" : Move all file headers to mapped header</li>|
+                    <li>"->" : Move selected mapped headers to file header</li>|
+                    <li>"<-" : Move selected file header to mapped header</li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    
+    <!-------------------- Slide Up and Down Icon -------------------------->
+    <div class="slideUpIcon" ng-show="showScreenControls.showSlideUpIcon"> 
+        <div class="slideIcon" ng-click="icontoggle()">
+            <i ng-class="slideIcon" class="fa" ></i>
+        </div>
+
+    </div>
+    <!-------------------- Batch Id -------------------------->
+    <div class="batchIdLabel" ng-show="showScreenControls.showBatchId"> 
+        <label>
+            Batch Id: <label>{{curBatchId}}</label>
+        </label>
+
+    </div>
+    <!-- -------------------- Table for Upload file --------------------------- -->
+    <div class="resultTable">
+        
+        <dm-table dm-datasource="tableData"  
+                  dm-searchable="true" 
+                  dm-theme="#ec6726" 
+                  dm-tab-seperator-key="isvalid"
+                  dm-editable-key="isvalid"
+                  dm-editable-condition="invalid"
+                  dm-cell-title="invalidreason"
+                  ng-show="showScreenControls.showTable"
+                  return-data-action="[{'method':'validateInvalidRecords','title':'Validate','showOnTab':['invalid']},{'method':'submitRecords','title':'Submit','showOnTab':['valid']},{'method':'stagingToMaster','title':'Move To Master','showOnTab':['staging data']}]"
+                  dm-table-data-actions
+                  dm-table-refresh="[{'method':'refreshBtn','title':'Refresh Staging Data','showOnTab':['staging data']},{'method':'refreshMasterBtn','title':'Refresh Master Data','showOnTab':['master data']},{'method':'refreshRejectionData','title':'Refresh Rejection Data','showOnTab':['rejected data']}]">  
+        </dm-table>
+    </div>
+    <!---------------------- Staging Data Section------------------------>
+
+    <div class="stagingTable"
+         ng-show="action_name === 'Staging Data'">
+        <div ng-show="showScreenControls.showStaging">
+            <h2> Uploaded Batches </h2>
+
+            <searchlist title="Entity"
+                        label="Entity"
+                        placeholder="Select Entity" 
+                        itemlist="{{entityList| byProp:'orgid':currentOrg.id}}" 
+                        itemvalue="entityid" 
+                        itemdesc="entitydescription"
+                        itemaction=""
+                        ng-model="stagingEntityItem"
+                        themecolor="ec6726">
+            </searchlist>
+        </div>
+        <!-- ---------------------- Staging Data Table ------------------------------- -->
+        <dm-table dm-datasource="stagingTable2Data"  
+                  dm-searchable="true" 
+                  dm-theme="ec6726"
+                  ng-show="showScreenControls.showStagingTable"
+                  dm-tab-seperator-key="status"
+                  return-data-action="[{'method':'submitBatchRecords','title':'Move To Master','showOnTab':['Pending']}]"
+                  dm-column-actions="dmTableAction">
+<!--                  dm-table-refresh="{'method':'refreshStaging','title':'Refresh Staging Data'}">  -->
+
+        </dm-table>
+    </div>
+<!--  -------------------------------- staging data section end -------------------->
+
+
+<!-------------------search engine section start-------------------------------------- - -->
+  <div class="stagingTable" ng-show="action_name === 'Search Engine'">
+        <div ng-show="showScreenControls.showSearchBy">  
+            <h2> Search Data By.......</h2>
+            <searchlist 
+                label="Entity"
+                title="Entity"  
+                placeholder="Select Entity" 
+                itemlist="{{entityList| byProp:'orgid':currentOrg.id}}" 
+                itemvalue="entityid" 
+                itemdesc="entitydescription"
+                itemaction=""
+                ng-model="masterEntityItem"
+                themecolor="ec6726">
+            </searchlist>
+            
+            <span ng-show="showSearchBy" style="margin-top: 28px;">
+            <input type="text" style="height: 28px; margin-left: 20px;" ng-model="searchValueData" placeholder="  Search">
+            <button type="button"  ng-click="getCall()"><i class="fa fa-search proceedIcons"></i></button></span>
+            </div>
+            
+
+
+
+             <dm-table dm-datasource="masterTableData"  
+            dm-searchable="true" 
+            dm-procedure="getMasterData"
+            dm-server-paging="collectiveServerCalls"
+            dm-theme="ec6726"
+            ng-show="showScreenControls.showMasterTable"
+            dm-table-data-actions=" "
+            dm-table-refresh="{'method':'refreshMaster','title':'Refresh Master Data'}">  
+
+  </dm-table> 
+</div>
+            
+         
+  
+<!-------------------search engine section end----------------------------------------->
+
+
+
+
+<!--   working  --- for  master table---section start--------------- - -->
+    <div class="stagingTable"
+         ng-show="action_name === 'Master Data'">
+        <div ng-show="showScreenControls.showMaster">  
+            <h2> Master Data</h2>
+         
+            <searchlist 
+                label="Entity"
+                title="Entity"  
+                placeholder="Select Entity" 
+                itemlist="{{entityList| byProp:'orgid':currentOrg.id}}" 
+                itemvalue="entityid" 
+                itemdesc="entitydescription"
+                itemaction=""
+                ng-model="masterEntityItem"
+                themecolor="ec6726">
+            </searchlist>
+         
+                                 <!----------------- In Master Table from Date to date ---------------------------------------->
+           
+             <div style="margin:30px;" ng-show="isShownFromToDate">
+                <table align="center"><tr>
+               <td> <div class="fromDateTime">
+                        <label>From Date :</label></div></td>
+                        <td> <input dm-time-picker style="text-align: center;" ng-model="fromDate" pikaday="leadClosureDate.myPickerObject" on-select="leadClosureDate.onPikadaySelect(pikaday)"/></td>
+                         <td><dm-time-picker ng-model="fromTime"></dm-time-picker></td>
+                   </tr>
+                     <tr><td>
+                    <div class="fromDateTime">
+                        <label>To Date :</label></div></td>
+                         <td><input dm-time-picker  style="text-align: center;" ng-model="toDate" pikaday="leadClosureDate.myPickerObject" on-select="leadClosureDate.onPikadaySelect(pikaday)"/></td>
+                         <td><dm-time-picker ng-model="toTime"></dm-time-picker></td>
+                    </tr>
+                    
+                    <tr><td></td>
+                   <td> <button class="getButtonStyle" ng-click="getMasterDataWithDate()">Get Master Data</button></td>
+               <td></td>
+                </tr>
+                </table>    
+                </div> 
+            </div>
+        <!-------------------------- master table data section end -------------------------->
+
+        <!--------- --------------- Staging Data Table --------------------------- ------>
+        <!--// commented on 5/2/2018 for requirement-------->
+             <dm-table dm-datasource="masterTableData"  
+                  dm-searchable="true" 
+                  dm-procedure="getMasterData"
+                  dm-server-paging="collectiveServerCalls"
+                  dm-theme="ec6726"
+                  ng-show="showScreenControls.showMasterTable"
+                  dm-table-data-actions=" "
+                  dm-table-refresh="{'method':'refreshMaster','title':'Refresh Master Data'}">  
+
+        </dm-table> 
+
+
+    </div>
+    
+    
+    <!-- --Rejected Table- -->
+    <div class="stagingTable"
+         ng-show="action_name === 'Rejected Data'">
+        <div ng-show="showScreenControls.showRejected">  
+            <h2> Rejected Data </h2>
+
+            <searchlist 
+                label="Entity"
+                title="Entity"
+                placeholder="Select Entity" 
+                itemlist="{{entityList| byProp:'orgid':currentOrg.id}}" 
+                itemvalue="entityid" 
+                itemdesc="entitydescription"
+                itemaction=""
+                ng-model="rejectedEntityItem"
+                themecolor="ec6726">
+            </searchlist>
+        </div>
+        <!--- --------------------- Staging Data Table ----------------------- ---------->
+        <dm-table dm-datasource="rejectedTableData"  
+                  dm-searchable="true" 
+                  dm-theme="ec6726"
+                  ng-show="showScreenControls.showRejectedTable"
+                  dm-table-data-actions
+                  dm-table-refresh="{'method':'refreshRejected','title':'Refresh Rejection Data'}">  
+
+        </dm-table>
+    </div>
+
+
+</section>

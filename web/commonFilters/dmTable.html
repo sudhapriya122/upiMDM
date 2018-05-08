@@ -1,0 +1,666 @@
+<style>
+
+    dm-table{
+        display: block;
+    }
+    dmTableContainer{
+        display: block;
+        width: 98%;
+        max-height: 90%;
+        margin: auto;
+        overflow: auto;
+/*        -webkit-user-select: none;   Chrome all / Safari all 
+        -moz-user-select: none;      Firefox all 
+        -ms-user-select: none;       IE 10+ 
+        user-select: none;           Likely future       */
+
+    }
+    dmTableContainer dmTable,dmTableContainer th,dmTableContainer td{
+        text-align: center;
+        border: 1px solid #BFBFBF;
+        border-collapse: collapse;
+        padding: 2px 7px;
+       
+    }
+    dmTableContainer th{
+        text-transform:capitalize; 
+    }
+    dmTableContainer dmTableBody{
+        display:block;
+        width:100%;
+    }
+    dmTableContainer dmTableBody table{
+        margin: 0 auto;
+        width:100%;
+    }
+    dmTableContainer table tbody td{
+        font-size: 0.8em;
+    }
+    dmTableDataPagination{
+        display: inline-block;
+        width: 800px;
+        margin: auto;
+        vertical-align: top;
+    }
+    dmTableDataPagination ul{
+        width: 100%;
+        white-space: nowrap;
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        display: block;
+
+        
+    }
+    dmTableDataPagination ul li{
+        font-weight: bold;
+        font-size: 17px;
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 5px;
+        padding: 8px 0px;
+        /*//width: 40px;*/
+        height: 20px;
+        text-align: center;
+        vertical-align: top;
+
+    }
+
+    dmTableDataPagination ul li input{
+        width:60px;
+        text-align: center;
+        border: none;
+    }
+    dmTableDataPagination ul li input:focus{
+        border: none;
+        outline: none;
+    }
+    dmTableDataActions{
+        display: inline-block;
+        width: 48%;
+        text-align: right;
+    }
+    dmTableDataActions button{
+        margin: 2% 0 0 0;
+    }
+    dmTableTabsContainer{
+        display: block;
+        width: 98%;
+        height: 40px;
+        margin: auto;
+        background-color: #d2d2d2;
+    }
+    dmTableTabsContainer ul{
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        text-align: left;/*22-jan-2016*/
+    }
+    dmTableTabsContainer ul li{
+        display: inline-block;
+        padding: 10px 10px;
+        cursor: pointer;
+        text-transform:capitalize;
+
+    }
+    dmTableTabsContainer ul li:not(:last-child){
+        border-right: 1px solid #e2e2e2;
+
+    }
+    dmTableOptionsContainer{
+        display: block;
+        width: 98%;
+        margin: 10px auto;
+    }
+    dmTableOptionsContainer>div{
+        display: inline-block;
+    }
+    .dmDownloadOptnsContainer{
+        width: 44%;
+        text-align: right;
+    }
+    .dmDownloadOptnsContainer>a{
+        display: inline-block;
+        margin: 0 2%;
+        padding: 1% 5%;;
+        cursor: pointer;
+        text-align: center;
+        
+    }
+    .dmDownloadOptnsContainer>a>label{
+        display: inline-block;
+        font-size: 0.75em;
+        cursor: pointer;
+        -ms-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg); 
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+       
+    }
+    .dmPageItemsContainer{
+        width: 30%;
+    }
+    .dmSearchContainer{
+        width: 20%;
+        text-align: right;
+
+    }
+    .active{
+        border-bottom: 2px solid #ED1C24;
+    }
+    nodata{
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: #c2c2c2;
+        margin: 10px auto;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+    .dmTableOdd{
+        background-color: #ffffff;
+    }
+    .dmTableEven{
+        background-color: #d2d2d2;
+    }
+    dmtablecontainer button{
+        background: #ec6726;
+        border: none;
+        padding: 5px 10px;
+        text-transform: capitalize;
+        color: #ffffff;
+    }
+    dmtablecontainer .inlineLable{
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 0.9em;
+        padding: 0 5px;
+      
+    }
+    th.ng-scope
+    {
+        color:black;
+         /* padding-left: 300px; */
+    }
+    .paginationContainer{
+        text-align: right;
+        margin-right: 3%;
+        padding-top: 1%;
+        font-weight: bold;
+    }
+    .paginationNavContainer{
+        background: grey;
+        cursor:pointer;
+    }
+    .paginationNavContainer i{
+        color: white;
+        padding: 4px;
+    }
+    .inlineBlock{
+        display: inline-block
+    }
+</style>
+
+<nodata ng-if="!datasource.length">
+     No Data in Staging....
+     Please Upload Data for staging..
+  </nodata>
+
+<div ng-if="datasource.length" style="display: block;
+     width: 100%;height: 50%;" ng-switch on="tabSeperatorKey?true:false">
+    <!--    {{selectedRows}}</br>
+        {{}}-->
+    <div ng-switch-when="true" style="display: block;height: 100%;width: 100%;">
+        <div class="paginationContainer" ng-show="dmServerPagin.showServerPagination" style="text-align: right">
+            <div class="inlineBlock">
+                <label><span>{{startIndex}}00000</span></label>-<label><span>{{endIndex}} of {{dmServerPagin.totalRecordCount}}  </span></label>
+            </div>
+            <div class="inlineBlock">
+                <span class="paginationNavContainer" ng-show="startIndex!=1" ng-click="getPrevRecords()"> <i class="fa fa-chevron-left "></i></span>
+                <span class="paginationNavContainer" ng-show="endIndex!=dmServerPagin.totalRecordCount" ng-click="getNextRecords()"> <i class="fa fa-chevron-right "></i></span>
+            </div>
+        </div>
+        <dmTableTabsContainer>
+            <ul>
+                <li ng-repeat="tab in tableTabs" 
+                    ng-click="showTab(tab)" 
+                    ng-style="tabShown.currentTab.toLowerCase() == tab.toLowerCase()?{'border-bottom':'2px solid #' + themeColor}:''">
+                    {{tab}}
+                </li>
+            </ul>
+        </dmTableTabsContainer>
+
+        <dmTables ng-repeat="tab in tableTabs" ng-show="showTabTable(tab)">
+            <dmTableOptionsContainer>
+                <div class="dmPageItemsContainer">
+                    <label style="display: inline-block;margin-left: 10px;">
+                        <input type="number" 
+                               ng-model="itemsPerPage.itemShown" 
+                               placeholder="10" 
+                               ng-blur="perPageItemShown()"
+                               ng-hide="true"></label>
+                    <span>Showing {{itemCountPerPage.startCount}}-{{itemCountPerPage.endCount}} out of {{datacount}}</span>
+                </div>
+                <div class="dmDownloadOptnsContainer">
+                    <a ng-click="downLoadTableData($event, 'excel')"
+                       ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}"><label>&#x2794;&#x2759;</label> Excel</a>
+                    <a ng-click="downLoadTableData($event, 'csv')"
+                       ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}"><label>&#x2794;&#x2759;</label>CSV</a>
+                    <a ng-repeat="controls in refreshTableCtrl"
+                       ng-click="refreshTable(controls['method'])"
+                       ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}"
+                       ng-show='isActionVisible(controls.showOnTab)'>{{controls['title']}}</a>
+                </div>
+                <div class="dmSearchContainer">
+                    <input type="text" ng-model="searchTableData.value" ng-if="searchable" placeholder="Search">
+                </div>
+
+
+
+            </dmTableOptionsContainer>
+
+            <dmTableContainer>
+                <!--        <tableHeader>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th ng-repeat="column in columns track by $index">
+                                            <label>
+                                                {{column.columnName}}
+                                            </label>
+                                            <i class="fa fa-chevron-up" 
+                                               ng-click='setSort(column.columnId, false)'
+                                               ng-show="sortable"
+                                               >
+                                            </i>
+                                            <i class="fa fa-chevron-down" 
+                                               ng-click='setSort(column.columnId, true)' 
+                                               ng-if="sortable">
+                                            </i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </tableHeader>-->
+                <dmTableBody>
+                    <table id="dmTable">
+                        <!-- <thead ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}">
+                            <tr>
+                                <th ng-repeat="column in columns track by $index"
+                                   ng-if="seperatorAsCol.toLowerCase() == 'true' || column.columnName != tabSep">
+                                    <label ng-if="column.columnType !== 'checkbox'" class="inlineLable">
+                                        {{column.columnName}}
+                                    </label>
+                                    <label ng-if="column.columnType === 'checkbox'">
+                                        <input type="checkbox"
+                                               ng-model="isAllRowSelected[tab][pageNumber.currentPage]" 
+                                               ng-change="selectAll()"
+                                               />
+                                    </label>
+                                    <label ng-if="['checkbox', 'button'].indexOf(column.columnType) < 0" class="inlineLable">
+                                        <i class="fa fa-chevron-up" 
+                                           ng-click='setSort(column.columnId, false)'
+
+                                           >
+                                        </i>
+                                        <i class="fa fa-chevron-down" 
+                                           ng-click='setSort(column.columnId, true)' 
+                                           >
+                                        </i>
+                                    </label>
+                                </th> 
+                              
+                            </tr>
+                        </thead> =========== -->
+
+                         <thead ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}">
+                            <tr>
+                                <th ng-repeat="column in columns track by $index"
+                                   ng-if="seperatorAsCol.toLowerCase() == 'true' || column.columnName != tabSep">
+                                    <label ng-if="column.columnType !== 'checkbox'" class="inlineLable">
+                                        {{column.columnName}}
+                                    </label>
+                                    <label ng-if="column.columnType === 'checkbox'">
+                                        <input type="checkbox"
+                                               ng-model="isAllRowSelected[tab][pageNumber.currentPage]" 
+                                               ng-change="selectAll()"
+                                               />
+                                    </label>
+                                    <label ng-if="['checkbox', 'button'].indexOf(column.columnType) < 0" class="inlineLable">
+                                        <i class="fa fa-chevron-up" 
+                                           ng-click='setSort(column.columnId, false)'
+
+                                           >
+                                        </i>
+                                        <i class="fa fa-chevron-down" 
+                                           ng-click='setSort(column.columnId, true)' 
+                                           >
+                                        </i>
+                                    </label>
+                                </th> 
+                              
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            <!--                            <tr ng-repeat="tableRow in shownTableData| filter:searchTableData | orderBy:currentSortColumn:sortOrder track by $index"
+                                                            ng-class-odd="'dmTableOdd'"
+                                                            ng-class-even="'dmTableEven'"
+                                                            ng-show="!showEditableRow[$index]"
+                                                            ng-dblclick="editRow(tableRow[editableProp].toLowerCase(),$index,true)">
+                                                            <td ng-repeat="column in columns" ng-if="seperatorAsCol.toLowerCase()=='true' || column.columnName!=tabSep">
+                                                                <label ng-if="column.columnType == 'text'">
+                                                                    {{tableRow[column.columnId]}}
+                                                                </label>
+                                                                <label ng-if="column.columnType == 'button'">
+                                                                    <button ng-click='columnActionClick(column.columnName,tableRow)'>
+                                                                        {{column.columnName}}
+                                                                    </button>
+                                                                </label>
+                                                                <label ng-if="column.columnType == 'checkbox'">
+                                                                    <input type="checkbox" 
+                                                                           ng-model="selectedRows[tab][tableRow[dataUniqueKey.toLowerCase()]]" 
+                                                                           ng-change=""
+                                                                           />
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-repeat="tableRow in shownTableData| filter:searchTableData | orderBy:currentSortColumn:sortOrder track by $index"
+                                                            ng-class-odd="'dmTableOdd'"
+                                                            ng-class-even="'dmTableEven'"
+                                                            ng-if="isDataEditable && tableRow[editableProp].toLowerCase() === editableCondn"
+                                                            ng-show="showEditableRow[$index]"
+                                                            ng-dblclick="editRow(tableRow[editableProp].toLowerCase(),$index,false)">
+                                                            <td ng-repeat="column in columns" ng-if="seperatorAsCol.toLowerCase()=='true' || column.columnName!=tabSep">
+                                                                <label ng-if="column.columnType == 'text'">
+                                                                    <input ng-model="tableRow[column.columnId]"
+                                                                           ng-value="tableRow[column.columnId]"
+                                                                           type="text"/>
+                                                                </label>
+                                                                <label ng-if="column.columnType == 'button'">
+                                                                    <button ng-click='columnActionClick(column.columnName,tableRow)'>
+                                                                        {{column.columnName}}
+                                                                    </button>
+                                                                </label>
+                                                                <label ng-if="column.columnType == 'checkbox'">
+                                                                    <input type="checkbox" 
+                                                                           ng-model="selectedRows[tab][tableRow[dataUniqueKey.toLowerCase()]]" 
+                                                                           ng-change=""
+                                                                           />
+                                                                </label>
+                                                            </td>
+                                                        </tr>-->
+                            <tr  ng-repeat="tableRow in shownTableData| orderBy:currentSortColumn:sortOrder track by $index"
+                                 ng-class-odd="'dmTableOdd'"
+                                 ng-class-even="'dmTableEven'"
+                                 ng-dblclick="editRow($event, tableRow[editableProp].toLowerCase(), $index)"
+                                 ng-init="initEditableFlag($index)">
+                                <td ng-repeat="column in columns" ng-if="seperatorAsCol.toLowerCase() == 'true' || column.columnName != tabSep"
+                                    ng-show="showUnEditableField(tabShown.currentTab.toLowerCase(), $parent.$parent.$index)"
+                                    title="{{tableRow[cellTitle][column.columnId]}}"
+                                    ng-style='tableRow[cellTitle][column.columnId]?tableRow[cellTitle][column.columnId]!=""?{background:"rgba(255,0,0,0.7)"}:{}:{}'>
+                                    <label ng-if="column.columnType == 'text'">
+                                        {{tableRow[column.columnId]}}
+
+                                    </label>
+                                    <label ng-if="column.columnType == 'button'">
+                                        <button ng-click='columnActionClick(column.columnName, tableRow)'>
+                                            {{column.columnName}}
+                                        </button>
+                                    </label>
+                                    <label ng-if="column.columnType == 'checkbox'">
+                                        <input type="checkbox" 
+                                               ng-model="selectedRows[tabShown.currentTab][pageNumber.currentPage][tableRow[dataUniqueKey.toLowerCase()]]" 
+                                               ng-change="chkForAllSelected()"
+                                               />
+                                    </label>
+                                </td>
+                                <td ng-repeat="column in columns" ng-if="seperatorAsCol.toLowerCase() == 'true' || column.columnName != tabSep"
+                                    ng-show="showEditableField(tabShown.currentTab.toLowerCase(), $parent.$parent.$index)">
+                                    <label ng-if="column.columnType == 'text'">
+                                        <input ng-model="tableRow[column.columnId]"
+                                               ng-value="tableRow[column.columnId]"
+                                               type="text"/>
+                                    </label>
+                                    <label ng-if="column.columnType == 'button'">
+                                        <button ng-click='columnActionClick(column.columnName, tableRow)'>
+                                            {{column.columnName}}
+                                        </button>
+                                    </label>
+                                    <label ng-if="column.columnType == 'checkbox'">
+                                        <input type="checkbox" 
+                                               ng-model="selectedRows[tabShown.currentTab][pageNumber.currentPage][tableRow[dataUniqueKey.toLowerCase()]]" 
+                                               ng-change="chkForAllSelected()"
+                                               />
+                                    </label>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </dmTableBody>
+            </dmTableContainer>
+
+
+            <dmTableOptionsContainer>
+                <dmTableDataPagination>
+                    <ul >
+                        <li ng-click="changePage(1)">
+                            &#x3c;&#x3c;
+                        </li>
+                        <li ng-click="changePage(pageNumber.currentPage - 1)">
+                            &#x3c;
+                        </li>
+                        <li>
+                            <label ng-click="chkForPageNumberEdit()"
+                                   ng-if="!isPageNumberEditable">
+                                {{pageNumber.currentPage}}    
+                            </label>
+                            <input type="number" 
+                                   ng-model="pageNumber.currentPage"
+                                   ng-blur="chkForPageNumberEdit()"
+                                   ng-if="isPageNumberEditable"
+
+                                   min="0"
+                                   max="" auto-focus>
+                            <label>{{"/" + totalPages}}
+                            </label> 
+                        </li>
+                        <li ng-click="changePage(pageNumber.currentPage)">
+                            Go   
+                        </li><li ng-click="changePage(pageNumber.currentPage + 1)">
+                            &#x3e;
+                        </li>
+                        <li ng-click="changePage(totalPages)">
+                            &#x3e;&#x3e;
+                        </li>
+                    </ul>
+                </dmTableDataPagination>
+                <dmTableDataActions>
+                    <button ng-repeat="dataActionBtn in returnCurrentData"
+                            ng-click="returnDataClick(dataActionBtn.method)"
+                            ng-show='isActionVisible(dataActionBtn.showOnTab)'>
+                        {{dataActionBtn.title}}
+                    </button><br /><br /><br /><br />
+                    <button ng-repeat="actionBtn in tableDataActions"
+                            ng-click="tableActionClick(actionBtn.action_function)"
+                            ng-show='isActionVisible(dataActionBtn.showOnTab)'>
+                        {{actionBtn.action_title}}
+                    </button>
+                </dmTableDataActions>
+            </dmTableOptionsContainer>
+        </dmtables>
+    </div>
+    <!-- WORKING FOR MASTER TABLE SHOWING TABLE DATA -->
+    <div ng-switch-default style="display: block;height: 100%;width: 100%;">
+    <div class="paginationContainer" ng-show="dmServerPagin.showServerPagination" style="text-align: right">
+             <div class="inlineBlock">
+                <label><span>{{startIndex}}</span></label>-<label><span>{{endIndex}} of {{dmServerPagin.totalRecordCount}}  </span></label>
+            </div> 
+             <div class="inlineBlock">
+                <span class="paginationNavContainer" ng-show="startIndex!=1" ng-click="getPrevRecords()"> <i class="fa fa-chevron-left "></i></span>
+                <span class="paginationNavContainer" ng-show="endIndex!=dmServerPagin.totalRecordCount" ng-click="getNextRecords()"> <i class="fa fa-chevron-right "></i></span>
+            </div> 
+        </div>
+        <div style="background-color: white">
+        <dmTables>
+            <dmTableOptionsContainer  style="background-color: white">
+                <div class="dmPageItemsContainer" style="background-color: white">
+                    <label style="display: inline-block;margin-left: 10px;">
+                        <input type="number" 
+                               ng-model="itemsPerPage.itemShown" 
+                               placeholder="10" 
+                               ng-blur="perPageItemShown()"
+                               ng-hide="true"></label>
+                    <span>Showing {{itemCountPerPage.startCount}}-{{itemCountPerPage.endCount}} out of {{datacount}}</span>
+
+                </div>
+                <div class="dmDownloadOptnsContainer">
+                    <a ng-click="downLoadTableData($event, 'excel')"
+                       ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}"><label>&#x2794;&#x2759;</label> Excel</a>
+                    <a ng-click="downLoadTableData($event, 'csv')"
+                       ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}"><label>&#x2794;&#x2759;</label> CSV</a>
+                    <a ng-click="refreshTable(refreshTableCtrl['method'])"
+                       ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}"
+                       ng-show='refreshTableCtrl'>{{refreshTableCtrl['title']}}</a>
+                </div>
+                <div class="dmSearchContainer">
+                    <input type="text" ng-model="searchTableData.value" ng-if="searchable" placeholder="Search">
+                </div>
+               
+            </dmTableOptionsContainer>
+
+            <dmTableContainer>
+
+                <!--        <tableHeader>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th ng-repeat="column in columns track by $index">
+                                            <label>
+                                                {{column.columnName}}
+                                            </label>
+                                            <i class="fa fa-chevron-up" 
+                                               ng-click='setSort(column.columnId, false)'
+                                               ng-show="sortable"
+                                               >
+                                            </i>
+                                            <i class="fa fa-chevron-down" 
+                                               ng-click='setSort(column.columnId, true)' 
+                                               ng-if="sortable">
+                                            </i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </tableHeader>-->
+
+                <dmTableBody> <!--table body-----working-------- - -->
+                    <table>
+                        <thead ng-style="{'background':'#'+themeColor,'color':getBrightness(themeColor)}">
+                            <tr>
+                                <th ng-repeat="column in columns track by $index">
+                                    <label ng-if="column.columnType !== 'checkbox'" class="inlineLable">
+                                        {{column.columnName}}
+                                    </label>
+                                    <label ng-if="column.columnType === 'checkbox'">
+                                        <input type="checkbox"
+                                               ng-model="isAllRowSelected[pageNumber.currentPage]" 
+                                               ng-change="selectAll()"
+                                               />
+                                    </label>
+                                    <label ng-if="['checkbox', 'button'].indexOf(column.columnType) < 0" class="inlineLable">
+                                        <i class="fa fa-chevron-up" 
+                                           ng-click='setSort(column.columnId, false)'>
+                                        </i>
+                                        <i class="fa fa-chevron-down" 
+                                           ng-click='setSort(column.columnId, true)'>
+                                        </i>
+                                    </label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody ng-class="tableStyles.bodyClass" >
+                            <tr ng-repeat="tableRow in shownTableData| orderBy:currentSortColumn:sortOrder track by $index"
+                                ng-class-odd="'dmTableOdd'"
+                                ng-class-even="'dmTableEven'">
+
+                                <td ng-repeat="column in columns">
+                                    <label ng-if="column.columnType == 'text'">
+                                        {{tableRow[column.columnId]}}
+                                    </label>
+                                    <label ng-if="column.columnType == 'button'">
+                                        <button ng-click='columnActionClick(column.columnName, tableRow)'>
+                                            {{column.columnName}}
+                                        </button>
+                                    </label>
+                                    <label ng-if="column.columnType == 'checkbox'">
+                                        <input type="checkbox" 
+                                               ng-model="selectedRows[pageNumber.currentPage][tableRow[dataUniqueKey]]" 
+                                               ng-change="chkForAllSelected()"
+                                               />
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </dmTableBody>
+            </dmTableContainer>
+
+
+            <dmTableOptionsContainer>
+                <dmTableDataPagination>
+
+                    <ul >
+                        <li ng-click="changePage(1)">
+                            &#x3c;&#x3c;
+                        </li>
+                        <li ng-click="changePage(pageNumber.currentPage - 1)">
+                            &#x3c;
+                        </li>
+                        <li>
+                            <label ng-click="chkForPageNumberEdit()"
+                                   ng-if="!isPageNumberEditable"
+                                   >
+                                {{pageNumber.currentPage}}    
+                            </label>
+                            <input type="number" 
+                                   ng-model="pageNumber.currentPage"
+                                   ng-blur="chkForPageNumberEdit()"
+                                   ng-if="isPageNumberEditable"
+
+                                   min="0"
+                                   max="" auto-focus>
+                            <label>{{"/" + totalPages}}
+                            </label>
+                        </li>
+                        <li ng-click="changePage(pageNumber.currentPage)">
+                            Go   
+                        </li>
+                        <li ng-click="changePage(pageNumber.currentPage + 1)">
+                            &#x3e;
+                        </li>
+                        <li ng-click="changePage(totalPages)">
+                            &#x3e;&#x3e;
+                        </li>
+                    </ul>
+                </dmTableDataPagination>
+                <dmTableDataActions>
+                    <button ng-repeat="dataActionBtn in returnCurrentData"
+                            ng-click="returnDataClick(dataActionBtn.method)"
+                            >{{dataActionBtn.title}}
+                    </button>
+                    <button ng-repeat="actionBtn in tableDataActions"
+                            ng-click="tableActionClick(actionBtn.action_function)">
+                        {{actionBtn.action_title}}
+                    </button>
+                </dmTableDataActions>
+            </dmTableOptionsContainer>
+        </dmtables>
+        </div>
+    </div>
+</div>

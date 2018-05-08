@@ -1,0 +1,525 @@
+
+/*************** MainPage Container*******************/
+section.mainpagecontainer{
+    margin-bottom:20px; 
+}
+/**************************** Proceed Action Section********************************/
+.mainpagecontainer .proceedAction{
+    min-height: 500px ;
+    height: auto;
+    margin-top: 30px;
+}
+.mainpagecontainer .proceedAction > ul{
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+.mainpagecontainer .proceedAction > ul:first-child > li{
+    display: inline-block;
+    vertical-align: top;
+    margin: 60px 40px 0 40px;
+
+}
+.mainpagecontainer .proceedAction > ul:nth-child(2) > li{
+    display: inline-block;
+    vertical-align: top;
+    margin: -10px 80px 0 80px;
+
+}
+/******************** Proceed actions style*****************************/
+.proceedImageSection I{
+    font-size: 3.5em;
+    color: #616161;
+    display: inline-;
+    margin-top: 29px;
+    margin-left: 4px;
+
+}
+.proceedImageSection{
+    border: 3px solid #f2f2f2;
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    box-shadow: 4px 1px rgba(0,0,0,0.6);
+    -moz-box-shadow: 4px 1px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 4px 1px #ec6726;
+    -o-box-shadow: 4px 1px rgba(0,0,0,0.6);
+}
+
+.proceedButtons{
+    color: red;
+    background: none;
+    height: 44px;
+    width: 164px;
+    margin: 25px 0 0 0;
+    cursor: pointer;
+    border-radius: 30px; 
+    font-size: 20px;
+    border: 2px red solid;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #ec6726;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+}
+.proceedButtons:hover {
+    box-shadow:  inset 200px 0 0 #ec6726;
+    color: #FFF;
+}
+/************************* Org List*****************************/
+.orgOptions{
+    text-align: center;
+}
+.orgOptions ul{
+    list-style: none;
+}
+.orgOptions> ul> li{
+    margin-top:30px;
+}
+/*************** Entity List*******************/
+.proceedEntity{
+    margin-top:15px;
+}
+/**************************Batch label**************************/
+.batchIdLabel{
+    text-align: center;
+    font-weight: bold;
+    padding: 5px 0 0 0;
+}
+/*********************** Slide up-down icon *****************************/
+.slide-up, .slide-down {
+    min-height: 0 !important;
+    max-height: 0;  
+    position:relative;
+    overflow-y: hidden;
+    -webkit-transition: max-height 1.0s ease-in-out;
+    -moz-transition: max-height 1.0s ease-in-out;
+    -o-transition: max-height 1.0s ease-in-out;
+    transition: max-height 1.0s ease-in-out;
+}
+.slide-up{
+    min-height: 0px !important;
+}
+
+.slide-down {     
+    min-height:500px !important;
+    max-height: 300em;
+    margin-top: 10px;
+}
+.slideUpIcon{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    margin-top:50px;
+}
+.slideIcon{
+    margin: auto;
+    width: 35px;
+    height: 35px;
+    background-color: #ec6726;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.slideUpIcon i{
+    display: inline-block;
+    margin-top: 7px;
+}
+
+/******************** common buttons *****************************/
+.commonButton{
+    background-color: #ffffff;
+    color: #ec6726;
+    height: 34px;
+    text-align: center;
+    border: 2px solid transparent;
+    border-color: #ec6726;
+    min-width: 107px;
+    margin-left: 10px;
+    box-shadow: inset 0 0 0 0 #ec6726;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+}
+.commonButton:hover{
+    box-shadow:  inset 200px 0 0 #ec6726;
+    color: #FFFFFF;
+}
+/********************** Mapping icons in create and change mapping *******************************/
+.mappingButtons{
+    width: 30px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    color: #ec6726;
+    border: 2px solid #ec6726;
+    height: 30px;
+    box-shadow: 2px 1px rgba(128, 243, 181, 0.6);
+}
+.mappingIcons ul li{
+    height: 25px;
+    padding: 5px;
+    margin-top:10px;
+}
+/******************* File Upload result section***************************/
+.fileUploadResult{
+    text-align: center;
+    overflow-y: auto;
+    max-height:280px;
+    width: 670px;
+    margin: auto;
+    margin-top: 40px;
+    overflow-x: hidden;
+}
+
+/***************** Upload Create and Change Section Heading***************************/
+h2{
+    font-size: 2.5em;
+    top: 16px;
+    position: relative;
+    text-align: center;
+    font-family: 'Ubuntu', cursive;
+    color: #616161;
+}
+/**********************Bread Crumbs******************************/
+.path ul{
+    margin:0;
+    padding:0;
+}
+.path ul li{
+    display:inline-block;
+}
+.path ul li div{
+    text-transform: capitalize;
+}
+.path{
+    z-index: 100;
+    position: fixed;
+    top: 55px;
+    right: 0;
+    text-align: right;
+    display: block;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 1px 1px 5px 1px rgba(218, 205, 205, 0.35);
+}
+.breadcrumb {
+    display: inline-block;
+    overflow: hidden;
+    height: 100%;
+    vertical-align: bottom;
+}
+.breadcrumb li {
+    text-decoration: none;
+    outline: none;
+    display: block;
+    line-height: 36px;
+    color: white;
+    cursor: pointer;
+    padding: 0 10px 0 28px;
+    background: #666;
+    background: linear-gradient(#666, #333);
+    position: relative;
+}
+.breadcrumb li:after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    right: -18px; 
+    width: 36px; 
+    height: 36px;
+    transform: scale(0.707) rotate(45deg);
+    z-index: 1;
+    box-shadow: 2px -2px 0 2px rgba(0, 0, 0, 0.4), 3px -3px 0 2px rgba(255, 255, 255, 0.1);
+    border-radius: 0 5px 0 50px;
+}
+.flat li, .flat li:after {
+    background: white;
+    color: black;
+    transition: all 0.5s;
+}
+.flat li:hover,.flat li:hover:after{
+    background: #ec6726;
+    color:#ffffff;
+}
+
+
+/******************** file Sheet Selection************************/
+.fileupload{
+    text-align: center;
+    margin-top: 38px;
+    margin-bottom:50px;
+}
+.fileoption{
+    display:inline-block;
+    color: #ec6726;
+    vertical-align: top;
+    margin: 10px 0 0 0;
+}
+.fileName{
+    padding:0 10px 0 10px;
+}
+select{
+    width:200px;
+    background-color: #ffffff;
+    padding:4px;
+}
+select > option:hover{
+    background-color: #ec6726;
+    color:#ffffff;
+}
+.fileoption select :hover{
+    background-color: #ec6726;
+}
+/*************************Create and Change Mapping Section *****************************/
+.mapping{
+    height:300px;
+}
+.changeMappingResults{
+    margin-bottom: 40px;
+}
+.list{
+    display: inline-block;
+    /*//width: 360px;*/
+    vertical-align: top;
+    text-align: center;
+    /* font-size: 0.9em; */
+}
+.list>ul{
+    margin: 0px;
+
+    width: 260px;
+
+    font-size: 1;
+}
+.list > ul > li{
+    list-style: none;
+    border-bottom: 1px solid #ffffff;
+    border-top: 1px solid #ffffff;
+    font-size: 0.9em;
+    padding:5px;
+    height: 20px;
+}
+.fileupload button{
+    outline: none;
+    background: none;
+    width: 157px;
+    height: 50px;
+    color: #ffffff;
+    background: #ec6726;
+    display: inline-block;
+    font-size: 1.2em;
+    font-weight: bold;
+    vertical-align: top;
+    border: none;
+}
+.list > ul > li:nth-child(2n){
+    background-color: #f2f2f2;  
+}
+/*************************Create and Change Mapping Section Headers*****************************/
+.labelHeader{
+    border-bottom: 2px solid red;
+    display:inline-block;
+    padding: 3px 0px;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.resultSection1{
+    overflow: auto;
+    width:50%;
+    height:100%;
+    display:inline-block;
+    vertical-align: top;
+}
+.resultSection2{
+    width:23%;
+    display:inline-block;
+    height:100%;
+    vertical-align: top;
+    text-align: center;
+}
+.resultSection2 ul{
+    list-style: none;
+}
+.resultSection3{
+    width: 24%;
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+}
+.resultSection3 > ul > li:nth-child(2n){
+    background-color: #f2f2f2;  
+}
+.resultSection3 ul{
+    list-style: none;
+}
+.resultSection3 ul li{
+    height:25px;
+    padding:5px;
+}
+/********************* drag and drop*****************************/
+.dragover{
+    border: 1px solid #ec6726 !important; 
+    /* create a BIG glow */
+    box-shadow: 0px 0px 10px #ec6726; 
+}
+.mapheader{
+    background-color:#ec6726 !important;
+    color:#ffffff !important;
+}
+/********************* Submit Section*******************************/
+.submit{
+    text-align: center;
+    margin: 40px 0 25px 0;
+    cursor: pointer;
+}
+.submit input{
+    padding:5px;
+}
+.mapping{
+    margin-top: 60px;
+}
+.fileheader{
+    background-color:#ec6726 !important;
+    color:#ffffff !important;
+}
+/************************ Upload File Custom Buutton*****************************/
+.inputFile{
+    display: none;
+}
+.fileName{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1.1em;
+    margin: 13px 0 0 10px;
+}
+.upload {
+    width: 157px;
+    height: 50px;
+    color: #ffffff;
+    background: #ec6726;
+    display: inline-block;
+    overflow: hidden;
+    position:relative;
+    font-weight: bold;
+}
+.upload div{
+    position:absolute;
+    top: 10px;
+    font-size: 1.2em;
+    left: 39px;
+}
+.upload div i{
+    margin:0 5px 0 0;
+}
+.upload input {
+    display: block !important;
+    width: 157px !important;
+    height: 57px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+}
+.customButton{  
+    background: #ec6726;
+    border-radius: 16px;
+    height: 51px;
+    display: inline-block;
+    cursor: pointer;
+    width: 145px;
+    color: #ffffff;
+}
+.getButtonStyle
+{
+    background-color: white;
+}
+
+.customButton>div{
+    padding-top: 12px;
+    font-size: 1.2em;
+}
+.customButton>div>i{
+    font-size: 1.3em;
+    margin-right: 4px;
+}
+/******************** Mapping Information*****************************/
+.information ul{
+    list-style: none;
+    color:red;
+    text-align: center;
+    font-size:0.75em;
+}
+.information ul li{
+    display:inline-block;
+    margin: 0 10px;
+    text-align: center;
+}
+/********************** Tables********************************/
+.resultTable{
+    margin-top:30px;
+}
+.stagingTable div{
+    text-align:center;
+}
+/******************** dm table **************************/
+dmTableDataActions button{
+    background-color: #ffffff;
+    margin: 2% 2% 0 2% !important;
+    color: #ec6726;
+    height: 34px;
+    text-align: center;
+    border: 2px solid transparent;
+    border-color: #ec6726;
+    min-width: 107px;
+    margin-left: 10px;
+    box-shadow: inset 0 0 0 0 #ec6726;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+}
+dmTableDataActions button:hover{
+    box-shadow:  inset 200px 0 0 #ec6726;
+    color: #FFFFFF; 
+}
+dm-table{
+    margin:10px 0 0 0;    
+    display: block;
+    height:100%;
+}
+dmtableoptionscontainer{
+    height:50px;
+}
+/************************ Scrollbar*******************************/
+.resultSection1::-webkit-scrollbar , .resultSection3::-webkit-scrollbar,.fileUploadResult::-webkit-scrollbar {
+    width: 10px;
+}
+.resultSection1::-webkit-scrollbar-track , .resultSection3::-webkit-scrollbar-track, .fileUploadResult::-webkit-scrollbar-track{
+    background-color: #ffffff;
+} /* the new scrollbar will have a flat appearance with the set background color */
+
+.resultSection1::-webkit-scrollbar-thumb , .resultSection3::-webkit-scrollbar-thumb , .fileUploadResult::-webkit-scrollbar-thumb {
+    background-color: #ec6726; 
+} 
+resultSection1::-moz-scrollbar , .resultSection3::-moz-scrollbar,.fileUploadResult::-moz-scrollbar {
+    width: 10px;
+}
+.resultSection1::-moz-scrollbar-track , .resultSection3::-moz-scrollbar-track, .fileUploadResult::-moz-scrollbar-track{
+    background-color: #ffffff;
+} /* the new scrollbar will have a flat appearance with the set background color */
+
+.resultSection1::-moz-scrollbar-thumb , .resultSection3::-moz-scrollbar-thumb , .fileUploadResult::-moz-scrollbar-thumb {
+    background-color: #ec6726; 
+} 
+
+.fromDateTime label, .fromDateTime input, .fromDateTime dm-time-picker {
+    display: inline-block;
+    
+}
+td {
+    padding: 7px;
+    text-align: center;
+}

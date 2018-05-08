@@ -1,0 +1,30 @@
+<loader ng-show="showMDMLoader" ng-include src="'templates/loader/loader.html'"></loader>
+<div class="mainheader">
+    <div class="mainHeaderLogo">
+        <!--        <span class="fa-stack fa-lg">
+                    <i class="fa fa-database fa-stack-2x"></i>
+                    <i class="fa fa-cloud-upload fa-stack-1x"></i>
+                </span>-->
+        <span>
+            <img src="images/logo.jpg" alt=""/>
+        </span>
+
+    </div>
+
+    <div class="appname">
+        <h1>{{appName}}</h1>
+    </div>
+    <div class="mainHeaderUserSection">
+
+        <ul>
+
+            <li><label>Welcome: </label><label>{{username}}</label></li>
+           <li><span><i class="fa fa-power-off powericon" ng-click="logout('logout');"></i></span></li>
+            <i class="fa fa-home transition" ng-click="gotoHome()"></i>
+        </ul>
+
+    </div>
+    <!--    <h2>Welcome:{{username}}</h2>
+        <i class="fa fa-power-off" ng-click="logout();"></i>-->
+</div>
+

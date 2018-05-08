@@ -1,0 +1,357 @@
+<style>
+    .dmTransition{
+        transition:all 0.5s ease-in-out;
+        -webkit-transition:all 0.5s ease-in-out;
+        -moz-transition:all 0.5s ease-in-out;
+        -ms-transition:all 0.5s ease-in-out;
+    }
+    .dmAnimated{
+        -webkit-animation-duration: 0.5s;
+        -moz-animation-duration: 0.5s;
+        -o-animation-duration: 0.5s;
+        animation-duration: 0.5s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    .dmAnimated.delay {
+        -webkit-animation-delay: 0.3s;
+        -moz-animation-delay: 0.3s;
+        -o-animation-delay: 0.3s;
+        animation-delay: 0.3s;
+    }
+    .dmAnimated.fadeIn {
+        -webkit-animation-name: fadeIn;
+        -moz-animation-name: fadeIn;
+        -o-animation-name: fadeIn;
+        animation-name: fadeIn;
+    }
+    .dmAnimated.scaleIn{
+        -webkit-animation-name: scaleIn;
+        -moz-animation-name: scaleIn;
+        -o-animation-name: scaleIn;
+        animation-name: scaleIn;
+    }
+    .dmAnimated.scaleOut{
+        -webkit-animation-name: scaleOut;
+        -moz-animation-name: scaleOut;
+        -o-animation-name: scaleOut;
+        animation-name: scaleOut;
+    }
+    @-webkit-keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+
+    @-moz-keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+
+    @-o-keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+
+    @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+    @-webkit-keyframes scaleIn {
+        0% {transform:         scale(0); /* CSS3 */
+            -moz-transform:    scale(0); /* Firefox */
+            -webkit-transform: scale(0); /* Webkit */
+            -o-transform:      scale(0); /* Opera */
+            -ms-transform:     scale(0); /* IE 9 */}
+        100% {transform:         scale(1); /* CSS3 */
+              -moz-transform:    scale(1); /* Firefox */
+              -webkit-transform: scale(1); /* Webkit */
+              -o-transform:      scale(1); /* Opera */
+              -ms-transform:     scale(1); /* IE 9 */}
+    }
+
+    @-moz-keyframes scaleIn {
+        0% {transform:         scale(0); /* CSS3 */
+            -moz-transform:    scale(0); /* Firefox */
+            -webkit-transform: scale(0); /* Webkit */
+            -o-transform:      scale(0); /* Opera */
+            -ms-transform:     scale(0); /* IE 9 */}
+        100% {transform:         scale(1); /* CSS3 */
+              -moz-transform:    scale(1); /* Firefox */
+              -webkit-transform: scale(1); /* Webkit */
+              -o-transform:      scale(1); /* Opera */
+              -ms-transform:     scale(1); /* IE 9 */}
+    }
+
+    @-o-keyframes scaleIn {
+        0% {transform:         scale(0); /* CSS3 */
+            -moz-transform:    scale(0); /* Firefox */
+            -webkit-transform: scale(0); /* Webkit */
+            -o-transform:      scale(0); /* Opera */
+            -ms-transform:     scale(0); /* IE 9 */}
+        100% {transform:         scale(1); /* CSS3 */
+              -moz-transform:    scale(1); /* Firefox */
+              -webkit-transform: scale(1); /* Webkit */
+              -o-transform:      scale(1); /* Opera */
+              -ms-transform:     scale(1); /* IE 9 */}
+    }
+
+    @keyframes scaleIn {
+        0% {transform:         scale(0); /* CSS3 */
+            -moz-transform:    scale(0); /* Firefox */
+            -webkit-transform: scale(0); /* Webkit */
+            -o-transform:      scale(0); /* Opera */
+            -ms-transform:     scale(0); /* IE 9 */}
+        100% {transform:         scale(1); /* CSS3 */
+              -moz-transform:    scale(1); /* Firefox */
+              -webkit-transform: scale(1); /* Webkit */
+              -o-transform:      scale(1); /* Opera */
+              -ms-transform:     scale(1); /* IE 9 */}
+    }
+    @-webkit-keyframes scaleOut {
+        0% {transform:         scale(1); /* CSS3 */
+            -moz-transform:    scale(1); /* Firefox */
+            -webkit-transform: scale(1); /* Webkit */
+            -o-transform:      scale(1); /* Opera */
+            -ms-transform:     scale(1); /* IE 9 */
+        }
+        100% {transform:         scale(0); /* CSS3 */
+              -moz-transform:    scale(0); /* Firefox */
+              -webkit-transform: scale(0); /* Webkit */
+              -o-transform:      scale(0); /* Opera */
+              -ms-transform:     scale(0); /* IE 9 */}
+    }
+
+    @-moz-keyframes scaleOut {
+        0% {transform:         scale(1); /* CSS3 */
+            -moz-transform:    scale(1); /* Firefox */
+            -webkit-transform: scale(1); /* Webkit */
+            -o-transform:      scale(1); /* Opera */
+            -ms-transform:     scale(1); /* IE 9 */
+        }
+        100% {transform:         scale(0); /* CSS3 */
+              -moz-transform:    scale(0); /* Firefox */
+              -webkit-transform: scale(0); /* Webkit */
+              -o-transform:      scale(0); /* Opera */
+              -ms-transform:     scale(0); /* IE 9 */}
+    }
+
+    @-o-keyframes scaleOut {
+        0% {transform:         scale(1); /* CSS3 */
+            -moz-transform:    scale(1); /* Firefox */
+            -webkit-transform: scale(1); /* Webkit */
+            -o-transform:      scale(1); /* Opera */
+            -ms-transform:     scale(1); /* IE 9 */
+        }
+        100% {transform:         scale(0); /* CSS3 */
+              -moz-transform:    scale(0); /* Firefox */
+              -webkit-transform: scale(0); /* Webkit */
+              -o-transform:      scale(0); /* Opera */
+              -ms-transform:     scale(0); /* IE 9 */}
+    }
+
+    @keyframes scaleOut {
+        0% {transform:         scale(1); /* CSS3 */
+            -moz-transform:    scale(1); /* Firefox */
+            -webkit-transform: scale(1); /* Webkit */
+            -o-transform:      scale(1); /* Opera */
+            -ms-transform:     scale(1); /* IE 9 */
+        }
+        100% {transform:         scale(0); /* CSS3 */
+              -moz-transform:    scale(0); /* Firefox */
+              -webkit-transform: scale(0); /* Webkit */
+              -o-transform:      scale(0); /* Opera */
+              -ms-transform:     scale(0); /* IE 9 */}
+    }
+    dmDialogueContainer{
+        display: block;
+        position: fixed;
+        background-color: rgba(0,0,0,0.6);
+        width: 100vw;
+        height: 100vh;
+        z-index: 3000;
+        top:0;
+    }
+    dmDialogue{
+        display: block;
+        background-color: #ffffff;
+        width: 28%;
+        height: 30%;
+        margin: auto;
+        margin-top: 13%;
+        border:2px solid transparent;
+        border-radius: 2px;
+        box-shadow: 0px 2px 3px #1B1B1B;
+        overflow: hidden;
+    }
+    dmDialogueHeader{
+        display: block;
+        height: 22%;
+        box-shadow: 0px 1px 5px #d2d2d2;
+        text-align: center;
+    }
+    dmDialogueHeaderTitle,
+    dmDialogueClose{
+        display: inline-block;
+        height: 100%;
+        text-align: right;
+        vertical-align: top;
+    }
+    dmDialogueClose>span{
+        display: inline-block;
+        cursor: pointer;
+        font-size: 1.8em;
+        color: #A9A9A9;
+    }
+    dmDialogueClose>span:hover{
+        color: #717171;
+    }
+    dmDialogueHeaderTitle{
+        width: 79%;
+        text-align: left;
+    }
+    dmDialogueHeaderTitle>label{
+        display: inline-block;
+        margin: 2% 0 0 5%;
+        font-size: 1.3em;
+        font-weight: bold;
+        color: #716262;
+    }
+    dmDialogueClose{
+        width: 18%;
+    }
+    dmDialogueBody{
+        display: block;
+        height: 50%;
+        /*border-bottom: 1px solid #d2d2d2;*/
+    }
+    dmDialogueBody>p{
+        color: #716262;
+        margin: 2% 4%;
+    }
+    dmDialogueActions{
+        display: block;
+        width: 100%;
+        height: 21%;
+        text-align: right;
+    }
+
+    dmDialogueActions>button{
+        padding: 0 2%;
+        min-width: 20%;
+        height: 70%;
+        display: inline-block;
+        margin: 0 3% 0 0;
+    }
+    dmDialogueActions>ul{
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+    dmDialogueActions>ul>li{
+        display: inline-block;
+        height: 100%;
+        cursor: pointer;
+        width:100%;
+    }
+    dmDialogueActions>ul>li>button{
+        border: none;
+        outline: none;
+        height:100%;
+        display: block;
+    }
+    dmToast{
+        display: block;
+        position: fixed;
+        bottom: 15%;
+        margin: auto;
+        width: 40%;
+        min-height: 7vh;
+        /*//background: rgba(0,0,0,0.7);*/
+        left: 50%;
+        border:1px solid;
+        border-radius: 2px;
+        z-index: 3000;
+        /*        box-shadow: 0px 2px 3px #1B1B1B;*/
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform:translateX(-50%);
+    }
+    dmToast dmToastMessage{
+        display: inline-block;
+        width: 85%;
+        margin: 2% 3%;
+       
+        word-break: word-wrap;
+    }
+    dmToast dmToastClose{
+        display: inline-block;
+        width: 7%;
+        color: #6D6D6D;
+        text-align: center;
+        font-size: 1.5em;
+        vertical-align: top;
+        cursor: pointer;
+    }
+    dmToast dmToastClose:hover{
+        color: #ffffff;
+    }
+    dmToast dmToastClose>span{
+        display: inline-block;
+        margin: 13% 2%;
+    }
+</style>
+<meta charset="utf-8"/>
+<dmDialogueContainer ng-show="dialogueCtrls.isShown && (dialogueCtrls.type.toLowerCase()=='alert' || dialogueCtrls.type.toLowerCase()=='confirm')" 
+                     class="dmAnimated"
+                     ng-class="dialogueCtrls.isShown?'fadeIn':'fadeOut'">
+    <dmDialogue class="dmAnimated "
+                ng-class="dialogueCtrls.isShown?'scaleIn':'scaleOut'">
+        <dmDialogueHeader>
+            <dmDialogueHeaderTitle>
+                <label>{{dialogueCtrls.title}}</label>
+            </dmDialogueHeaderTitle>
+            <dmDialogueClose ng-click="actionClick()" >
+                <span class="dmTransition">&#9932;</span>
+            </dmdialogueclose>
+        </dmDialogueHeader>
+        <dmDialogueBody>
+            <p>{{dialogueCtrls.message}}</p>
+        </dmDialogueBody>
+        <dmDialogueActions>
+            <button ng-repeat="ctrl in dialogueCtrls.actionLabel"
+                    ng-click="actionClick($index)"> {{ctrl}}</button>
+            <!--            <ul>
+                            <li ng-repeat="ctrl in dialogueCtrls.actionLabel"
+                                ng-click="actionClick($index)">
+                                <button
+                                ng-mouseenter="setHover($index)"
+                                ng-mouseleave="unsetHover($index)"
+                                ng-style="getHoverStyle($index)">
+                                    {{ctrl}}
+                                </button>
+                            </li>
+                        </ul>-->
+        </dmDialogueActions>
+    </dmDialogue>
+</dmDialogueContainer>
+<dmToast ng-show="dialogueCtrls.isShown && dialogueCtrls.type.toLowerCase() == 'toast'"
+         class="dmAnimated"
+         ng-class="dialogueCtrls.isShown?'fadeIn':'fadeOut'"
+         ng-style="dialogueColor[dialogueCtrls.messageType]"
+         ng-mouseenter="persistToast()"
+         ng-mouseleave="reInitializeToast()">
+    <dmToastMessage>
+      {{dialogueCtrls.message}}
+    </dmToastMessage>
+    <dmToastClose class="dmTransition" ng-click="actionClick()">
+        <span>&#9932;</span>
+    </dmtoastclose>
+</dmToast>

@@ -1,0 +1,122 @@
+<style>
+/*    .horizontalListContainer{
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 50px auto;
+        overflow: hidden;
+    }
+    .horizontalListContainer .leftDiv,.horizontalListContainer .rightDiv{
+        position: relative;
+        display: inline-block;
+        width: 5%;
+        margin: 0px;
+        padding: 0px;
+        vertical-align: top;
+        cursor: pointer;
+    }
+    .horizontalListContainer .listContainer{
+        position: relative;
+        display: inline-block;
+        width: 85%;
+        overflow: hidden;
+        height: 100%;
+    }
+    .horizontalListContainer ul{
+        position: relative;
+        display: inline-block;
+        width:auto;
+        left: 0px;
+        height: 100%;
+        list-style: none;
+        white-space: nowrap;
+        margin: 0px;
+        padding: 0px;
+        transition:all 0.5s;
+        -webkit-transition:all 0.5s;
+        -moz-transition:all 0.5s;
+        -ms-transition:all 0.5s;
+    }
+    .horizontalListContainer ul li{
+        display: inline-block;
+        padding: 1%;
+        width: auto;
+        height:98%;
+        margin: 0 1%;
+
+        vertical-align: top;
+    }*/
+    dmScrollListContainer{
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    dmScrollListContainer>dmNavigatorContainer{
+    position: relative;
+    display: inline-block;
+    width: 5%;
+    margin: 0px;
+    padding: 0px;
+    vertical-align: top;
+    cursor: pointer;
+    height: 100%;
+    text-align: center;
+    display: none;
+    }
+    dmScrollListContainer>dmScrollList{
+        position: relative;
+        display: inline-block;
+        
+        overflow: hidden;
+        height: 100%;
+    }
+    dmScrollListContainer>dmScrollList ul{
+        position: relative;
+        display: inline-block;
+        width:auto;
+        left: 0px;
+        height: 100%;
+        list-style: none;
+        white-space: nowrap;
+        margin: 0px;
+        padding: 0px;
+        transition:all 0.5s;
+        -webkit-transition:all 0.5s;
+        -moz-transition:all 0.5s;
+        -ms-transition:all 0.5s;
+    }
+    dmScrollListContainer>dmScrollList ul li{
+        display: inline-block;
+        vertical-align: top;
+    }
+</style>
+<dmScrollListContainer ng-show="isListAvailable(listsArray)">
+    <dmNavigatorContainer ng-click="" ng-mousedown="onLeftScroll()" ng-mouseup="clear()">
+        <label>&#x3c;</label>
+    </dmNavigatorContainer>
+    <dmScrollList>
+         <ul>
+            <li ng-repeat="list in listsArray"
+                ng-click="dmListClick(list.actionName)">
+                <label>{{list.listName}}</label>
+            </li>
+        </ul>
+    </dmscrolllist>
+    <dmNavigatorContainer  ng-click="onRightScroll()">
+        <label>&#x3e;</label>
+    </dmNavigatorContainer>
+</dmscrolllistcontainer>
+<!--<div class="horizontalListContainer">
+    <div class="leftDiv" ng-click="onLeftScroll()"><<</div>
+    <div class="listContainer">
+        <ul>
+            <li ng-repeat="list in listsArray"
+                ng-click="dmListClick(list.actionName)">
+                {{list.listName}}
+            </li>
+
+
+        </ul></div>
+    <div class="rightDiv" ng-click="onRightScroll()">>></div>
+</div>-->

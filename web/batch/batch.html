@@ -1,0 +1,59 @@
+<!--<!DOCTYPE html>
+
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<appheader appname="Master Data Management" dmUsername="userName"></appheader>
+<loader ng-show="showMDMLoader" ng-include src="'templates/loader/loader.html'"></loader>
+<section class="mainpagecontainer" ng-controller="batchCtrl" ng-style="RouteData.get('sectionStyle')" ng-init="checkSession()">
+    <!-- -----------------BreadCrumbs------------------------------>
+
+    <div class="path">
+        <ul class ="breadcrumb flat ">
+            <li  ng-repeat='name in getPath' ng-click="pathAction(name.action, $index,$event)" >
+                <div>{{name.name}}</div>
+                <!--                <div class='pathData'>{{name.name}}</div>
+                                <div class='pathData'><i ng-click="pathAction(name.action,$index)" class='fa fa-pencil'></i></div>-->
+            </li>
+        </ul>
+    </div>
+    <div class="stagingTable"
+         
+         >
+
+        <div>
+            <h2> Uploaded Batches </h2>
+           Entity Name: {{entityName}}
+
+            <searchlist title="Entity"
+                        label="Entity"
+                        placeholder="Select Entity" 
+                        itemlist="{{entityList| byProp:'orgid':currentOrg.id|byProp:'showstagingdata':'Y'}}" 
+                        itemvalue="entityid" 
+                        itemdesc="entitydescription"
+                        ng-show="showEntityList"
+                        itemaction=""
+                        ng-model="stagingEntityItem"
+                        themecolor="ec6726">
+            </searchlist>
+        </div>
+        <!------------------------ Batch Data Table --------------------------- ------>
+        <div>
+            <dm-table dm-datasource="batchData"  
+                      dm-searchable="true" 
+                      dm-theme="ec6726"
+                      dm-tab-seperator-key="status"
+                      dm-column-actions="dmTableAction"
+                      return-data-action="[{'method':'submitRecords','title':'Move To Master','showOnTab':['Pending']}]"
+                      dm-table-data-actions=""
+                      ng-show="batchDataTable">  
+
+            </dm-table>
+        </div>
+       
+    </div>
+</section>
+
+
+
